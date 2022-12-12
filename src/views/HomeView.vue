@@ -1,9 +1,16 @@
-<script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+<script>
+  export default {
+    data(){
+      return{
+        username: '',
+      }
+    }
+  }
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h3>Introduce tu nombre de tu usuario </h3>
+    <input type="text" placeholder="username" v-model="username">
   </main>
 </template>
