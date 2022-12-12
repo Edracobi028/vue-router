@@ -9,10 +9,7 @@
             </div>
         </aside>
         <article>
-            <!-- vue-router nos brinda 2 objetos json: router y route (con info a la cual puedes acceder) -->
-            {{ this.$router }}
-            <br>
-            {{ this.$route.params.chatId }}
+            <router-view></router-view>
         </article>
     </div>
 </template>
