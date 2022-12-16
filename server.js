@@ -17,3 +17,5 @@ app.use(express.static('dist'))
 app.listen(8080, () => {
     console.log(`localhost:8080`)
 })
+
+//Arrancar el proyecto con el comando: node server.js

@@ -66,5 +66,16 @@ const router = createRouter({
 
 });
 
+//Configuracion para los navigations wats por funcion del objeto router
+//recibe dos argumentos to y from
+router.beforeEach((to, from) => {
+    console.log(to, from)
+    //Si viene de home nos dirija a about
+    if(to.path === '/') return '/about'
+
+    //cancelar la navegación a la ruta
+    return true
+})
+
 //Hacer publica la variable router para usarla en index.Js y usarla en la aplicación
 export default router 
