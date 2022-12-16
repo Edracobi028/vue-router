@@ -1,13 +1,18 @@
 //Configurar de nuestro sistemas de rutas
 //importar nuestra capacidad de hacer rutas con vue-router
-import { createRouter, createWebHistory } from 'vue-router';
+//import { createRouter, createWebHistory } from 'vue-router'; //modo HTML5
+import { createRouter, createWebHashHistory } from 'vue-router';  //modo Hash
 import HomeView from '../views/HomeView.vue'; 
+
+//Habilitar el modo hash para que el proyecto soporte servidores que no estan preparados para este tipo d
+
 //almacenamos en una variable y ejecutamos la funcion recibe un Json de configuracion de sistema de rutas
 const router = createRouter({
 //Le indicamos2 cosas: modo de historial de navegación rutas que va a definir para qeu exista
 
-    //importamos createWebHistory
-    history: createWebHistory(),
+    //importamos createWebHistory 
+    //history: createWebHistory(), //modo HTML5
+    history: createWebHashHistory(), //modo Hash
 
     //Lista de rutas de nuestra aplicación 
     routes:[
