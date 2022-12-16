@@ -6,26 +6,40 @@ import HomeView from '../views/HomeView.vue';
 const router = createRouter({
 //Le indicamos2 cosas: modo de historial de navegación rutas que va a definir para qeu exista
 
-//importamos createWebHistory
-history: createWebHistory(),
+    //importamos createWebHistory
+    history: createWebHistory(),
 
-//Lista de rutas de nuestra aplicación 
-routes:[
-    //nombre ruta / componente referencia
-    { path: '/', component: HomeView },
+    //Lista de rutas de nuestra aplicación 
+    routes:[
+        //nombre ruta / componente referencia
+        { path: '/', name: 'home', component: HomeView },
 
-    //forma asincrona de importación para que solo al ser llamadas las descargue
-    { path:'/about', component: () => import('../views/AboutView.vue') },
-    { 
-        path:'/chats', 
-        component: () => import('../views/ChatsView.vue'),
-        children:[
-            { path:':chatId', component: () => import('../views/ChatView.vue') },
-        ],
-    },
-    //Para crear ruta se usa una variable y la nombramos
-    
-],
+        //Agregar vista al sistema de rutas para que pueda visualizarse
+        {   path: '/session', 
+            component: () => import('../views/SessionView.vue'),
+            /* Agregar los componentes que se vran en esta vista */
+            children: [
+                { path: '',
+                  components: {
+
+                     default: () => import ('../views/LoginView.vue'),
+                     register: () => import ('../views/RegisterView.vue'),
+                  }  
+                }
+            ]
+        },
+        //forma asincrona de importación para que solo al ser llamadas las descargue
+        { path:'/about', name: 'about', component: () => import('../views/AboutView.vue') },
+        { 
+            path:'/chats', 
+            component: () => import('../views/ChatsView.vue'),
+            children:[
+                { path:':chatId', component: () => import('../views/ChatView.vue') },
+            ],
+        },
+        //Para crear ruta se usa una variable y la nombramos
+        
+    ],
 
 });
 
