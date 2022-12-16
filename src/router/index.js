@@ -12,7 +12,12 @@ const router = createRouter({
     //Lista de rutas de nuestra aplicación 
     routes:[
         //nombre ruta / componente referencia
-        { path: '/', name: 'home', component: HomeView },
+        { path: '/', name: 'home', component: HomeView, alias: ['/home'] },
+
+        //Ruta de Redireccion por path o por name a una ruta ya existente y asi no duplicar
+        //{ path: '/home', redirect: '/' },
+
+        //Alias de redirección
 
         //Agregar vista al sistema de rutas para que pueda visualizarse
         {   path: '/session', 
@@ -21,7 +26,6 @@ const router = createRouter({
             children: [
                 { path: '',
                   components: {
-
                      default: () => import ('../views/LoginView.vue'),
                      register: () => import ('../views/RegisterView.vue'),
                   }  
