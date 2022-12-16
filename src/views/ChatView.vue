@@ -6,6 +6,13 @@
 
 <script>
 export default {
+    props:{
+        //Definimos las caracteristicas standard de un prop
+        chatId:{
+            type: String,
+            default: '',
+        },
+    },
     data(){
         return{
             messages: [
@@ -24,7 +31,7 @@ export default {
             //cada mensaje de la lista lo recibimos como parametro
             return this.messages.filter((msg) => {
                 //el id lo transformamos a string
-                return `${msg.author}` === this.$route.params.chatId
+                return `${msg.author}` === this.chatId
             })
         }
     }

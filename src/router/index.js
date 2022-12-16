@@ -38,7 +38,21 @@ const router = createRouter({
             path:'/chats', 
             component: () => import('../views/ChatsView.vue'),
             children:[
-                { path:':chatId', component: () => import('../views/ChatView.vue') },
+                { 
+                    path:':chatId', 
+                    component: () => import('../views/ChatView.vue') ,
+                    //Esto lo agregamos para que funcione el prop, toma todos los params de la url y con el mismo nombre los envia
+                    /* props: true,             //Activandolo con un true como minimo */
+                    /* props: { chatId : '3' }, //pasando un json */
+                    
+                    //para tomar decisiones, nos devuelve el objeto route y tenemos que aplicar el return para convertir lo que venga en route sea un prop
+                    props: (route)  => {
+                        return{
+                            chatId: route.params.chatId
+                        }
+                    },//pasando una funcion arrow
+
+                },
             ],
         },
         //Para crear ruta se usa una variable y la nombramos
