@@ -3,6 +3,7 @@
 //import { createRouter, createWebHistory } from 'vue-router'; //modo HTML5
 import { createRouter, createWebHashHistory } from 'vue-router';  //modo Hash
 import HomeView from '../views/HomeView.vue'; 
+import NotFound from '../views/404View.vue'; 
 
 //Habilitar el modo hash para que el proyecto soporte servidores que no estan preparados para este tipo d
 
@@ -16,6 +17,10 @@ const router = createRouter({
 
     //Lista de rutas de nuestra aplicación 
     routes:[
+        { path: '/404', component: NotFound },
+
+        //Redireccionar a 404 con expresion regular .* en todas las demas que no sean las declaradas muestra 404
+        {path:'/:catchAll(.*)' , redirect: '/404' },
         //nombre ruta / componente referencia
         {   path: '/', 
             name: 'home', 
@@ -54,7 +59,7 @@ const router = createRouter({
             component: () => import('../views/ChatsView.vue'),
             meta: { requiresAuth : true, roles: ['admin'] }, 
             children:[
-                {   path:':chatId', 
+                {   path: ':chatId(\\d+)', //condicionar para que solamente reciba numeros
                     component: () => import('../views/ChatView.vue') ,
                     //Esto lo agregamos para que funcione el prop, toma todos los params de la url y con el mismo nombre los envia
                     /* props: true,             //Activandolo con un true como minimo */

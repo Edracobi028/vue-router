@@ -28,7 +28,8 @@ watch(
             {id: 1, name: 'Ximena' },
             {id: 2, name: 'Daniel' },
             {id: 3, name: 'Miguel' },
-        ],
-        { immediate: true } //Ejecutara desde la 1ra vez que tiene un valor  el watch
-    })
+        ]
+    },
+    { immediate: true } //Ejecutara desde la 1ra vez que tiene un valor  el watch
+    )
 </script>
