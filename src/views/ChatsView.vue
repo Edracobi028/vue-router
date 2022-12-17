@@ -18,12 +18,34 @@
 export default{
     data(){
         return{
-            chats:[
-                {id: 1, name: 'Ximena' },
-                {id: 2, name: 'Daniel' },
-                {id: 3, name: 'Miguel' },
+            chats: [
+                
             ]
         }
-    }
+    },
+
+    //Escuchar los cambios en las rutas con watcher  clave =  variable a seguir valor = funcion()
+    /* watch: {
+        '$route.params': (val) => {
+            console.log('update params', val )
+        }
+    }, */
+    //Otra forma de escribir un watch con created()
+    created(){
+        this.$watch(
+            () => this.$route.params,
+            (val) => {
+                console.log('update params', val)
+                this.chats = [
+                    {id: 1, name: 'Ximena' },
+                    {id: 2, name: 'Daniel' },
+                    {id: 3, name: 'Miguel' },
+                ]
+            },
+            { immediate: true } //Ejecutara desde la 1ra vez que tiene un valor  el watch
+        )
+        
+    },
+
 };
 </script>

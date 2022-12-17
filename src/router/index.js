@@ -81,14 +81,14 @@ const router = createRouter({
 router.beforeEach((to, from) => {
     console.log(to, from)
 
-    //El signo '?' es para evitar que rompa ya que no todas tienen el valor meta
-    if(to.meta?.requiresAuth && to.meta.roles.includes('admin')) {
+    //El signo '?' es para evitar que rompa ya que no todas tienen el valor meta 
+    /* if(to.meta?.requiresAuth && to.meta.roles.includes('admin')) {
         console.log(to.path, 'requires auth')
         return '/session'
     }
 
     //Si viene de home nos dirija a about
-    if(to.path === '/') return '/about'
+    if(to.path === '/') return '/about' */
 
     //cancelar la navegación a la ruta
     return true
