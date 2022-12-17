@@ -17,7 +17,14 @@ const router = createRouter({
     //Lista de rutas de nuestra aplicación 
     routes:[
         //nombre ruta / componente referencia
-        { path: '/', name: 'home', component: HomeView, alias: ['/home'] },
+        {   path: '/', 
+            name: 'home', 
+            component: HomeView, 
+            alias: ['/home'],
+            meta: {
+                requiresAuth : false
+            } 
+        },
 
         //Ruta de Redireccion por path o por name a una ruta ya existente y asi no duplicar
         //{ path: '/home', redirect: '/' },
@@ -38,13 +45,16 @@ const router = createRouter({
             ]
         },
         //forma asincrona de importación para que solo al ser llamadas las descargue
-        { path:'/about', name: 'about', component: () => import('../views/AboutView.vue') },
-        { 
-            path:'/chats', 
+        {   path:'/about', 
+            name: 'about', 
+            component: () => import('../views/AboutView.vue') 
+        },
+
+        {   path:'/chats', 
             component: () => import('../views/ChatsView.vue'),
+            meta: { requiresAuth : true, roles: ['admin'] }, 
             children:[
-                { 
-                    path:':chatId', 
+                {   path:':chatId', 
                     component: () => import('../views/ChatView.vue') ,
                     //Esto lo agregamos para que funcione el prop, toma todos los params de la url y con el mismo nombre los envia
                     /* props: true,             //Activandolo con un true como minimo */
@@ -70,6 +80,13 @@ const router = createRouter({
 //recibe dos argumentos to y from
 router.beforeEach((to, from) => {
     console.log(to, from)
+
+    //El signo '?' es para evitar que rompa ya que no todas tienen el valor meta
+    if(to.meta?.requiresAuth && to.meta.roles.includes('admin')) {
+        console.log(to.path, 'requires auth')
+        return '/session'
+    }
+
     //Si viene de home nos dirija a about
     if(to.path === '/') return '/about'
 
