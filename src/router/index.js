@@ -5,6 +5,9 @@ import { createRouter, createWebHashHistory } from 'vue-router';  //modo Hash
 import HomeView from '../views/HomeView.vue'; 
 import NotFound from '../views/404View.vue'; 
 
+//Llamar a la variable de .env
+const stage = import.meta.env.VITE_STAGE
+
 //Habilitar el modo hash para que el proyecto soporte servidores que no estan preparados para este tipo d
 
 //almacenamos en una variable y ejecutamos la funcion recibe un Json de configuracion de sistema de rutas
@@ -72,7 +75,7 @@ const router = createRouter({
                         }
                     },//pasando una funcion arrow
 
-                },
+                }, 
             ],
         },
         //Para crear ruta se usa una variable y la nombramos
@@ -81,7 +84,16 @@ const router = createRouter({
 
 });
 
-//Configuracion para los navigations wats por funcion del objeto router
+//Condicion para que solo muestre la pagina si estamos en modo prueba
+//La ruta Se agrega  programaticamente al iniciar el proyecto
+if(stage === 'test'){
+    router.addRoute({
+        path: '/profile',
+        component: () => import('../views/ProfileView.vue')
+    })
+}
+
+//Configuracion para los navigations guards por funcion del objeto router
 //recibe dos argumentos to y from
 router.beforeEach((to, from) => {
     console.log(to, from)
